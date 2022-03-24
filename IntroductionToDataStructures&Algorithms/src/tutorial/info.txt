@@ -1,0 +1,20 @@
+    Data Structure
+    - Organizes and stores data.
+    - Each one has advantages and disadvantages.
+    - Depending on what you want to do one data structure might perform better than the others.
+
+
+    Algorithm
+    - It describes the steps that you have to achieve a result.
+    - There is usually more than one algorithm to accomplish a task (the same for implementations).
+    - An algorithm is not an implementation, it only describes the steps, but these words may be used interchangeably.
+
+    Example
+    Making Tea
+    1. Boil water.
+    2. Add a teabag to a cup.
+    3. Pour the boiling water into the cup.
+    4. Remove the teabag when tea is ready.
+    5. Add the desired amount of milk to the cup.
+    6. Add the desired amount of sugar to the cup.
+    7. Stir the contents of the cup with a spoon.

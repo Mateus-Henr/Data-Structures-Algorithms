@@ -1,0 +1,50 @@
+    Big O Notation
+    This notation is a more precise way to compare algorithms. It uses an "O" followed by the largest power in the
+    equation. It gives us a way to compare time complexity algorithms in an object manner.
+
+
+    Why to use it?
+    It's important to notice that if you are looking at times as the form of comparison, the hardware will directly
+    influence the time, and other things as well. So in order to overcome this issue, this notation will help us with
+    that once it involves math rather than the place where the implementation is being executed.
+
+
+    How does it work?
+    By calculating the number of temps that it takes to execute an algorithm, we can measure its complexity.
+    It tells us how fast an algorithm will scale upon the number of items. In other words, steps/items.
+
+
+    Types of complexity
+    Time Complexity - This is the number of steps involved to run an algorithm.
+                      This is usually what we calculate. And we often look at the worst case scenario (upper bound).
+    Memory Complexity - This is the amount of memory necessary to execute an algorithm.
+                        Due to the cheapness of memory nowadays, this is not a considerable issue anymore.
+
+
+    Types of Big Os (times complexity)
+    O(1) - Constant. (BEST)
+    O(log(n)) - Logarithmic.
+    O(n) - Linear.
+    O(nlog(n)) - n log-star n.
+    O(n²) - Quadratic. (WORST)
+
+
+    Example
+    Add Sugar to Tea
+    1. Fetch the bowl containing the sugar.
+    2. Get a spoon.
+    3. Scoop out sugar using the spoon.
+    4. Pour the sugar from the spoon into the tea.
+    5. Repeat steps 3 and 4 until you've added the desired amount of sugar.
+
+    Notice that the number of times that the algorithm above runs is based on the number of sugars that the person
+    wants. Consequently, if we have 1 sugar, we have 4 steps, if we have 2 sugars, we have 6 steps, and so on.
+
+    Analysis
+    • Number of desired sugars = n.
+    • Total number of steps = 2n + 2. (2n due to the repetition of step 3 and 4, and 2 due to the steps 1 and 2).
+    • As n grows, the number of steps grows.
+    • The "2" in 2n and the "+ 2" remain constant, so they don't factor into the time complexity (we take it out).
+      The value of n determines the growth rate.
+    • Time complexity is O(n).
+    • Linear time complexity since we have a linear progression in the equation.
