@@ -1,4 +1,6 @@
-package first;/*  Arrays
+package first;
+
+/*  Arrays
     The size must be specified and cannot be changed afterwards.
     It's not a dynamic data structure.
     Indexes are 0 based.
