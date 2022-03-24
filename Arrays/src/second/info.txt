@@ -1,0 +1,34 @@
+    Arrays in Memory
+
+    Organization in memory
+    The way that an array is stored in memory is through a contiguous block in memory. And consequently, due to that,
+    it explains why an array cannot be resized in memory since we wouldn't be able to guarantee this continuous block.
+
+
+    Each element in memory
+    Once an array must be of one data type, all the elements of it must occupy the same space in memory.
+    When working with objects, what's stored in the variable is an object reference. Associating it with C language,
+    we could say that what is saved in the array is a pointer to the object.
+    Object references are all the same size.
+
+
+    Calculating the address that an array occupies
+    By having the address of the first element of an array, we can calculate an ith position or its contiguous block
+    through equations. For example, to calculate the ith index we could use:
+    x (initial address) + i * y (size each element).
+
+
+    Time complexity of getting an element
+    If we know the index of the element, we will have a complexity of O(1) since we just go to the position.
+
+
+    Array's addresses example
+    Considering the start address of the array 12, and each element size 4 bytes, we have:
+        Address of the array[0] = 12
+        Address of the array[1] = 12 + (1 * 4) = 16
+        Address of the array[2] = 12 + (2 * 4) = 20
+        Address of the array[3] = 12 + (3 * 4) = 24
+        Address of the array[4] = 12 + (4 * 4) = 28
+        Address of the array[5] = 12 + (5 * 4) = 32
+        Address of the array[6] = 12 + (6 * 4) = 36
+    OBS: It also shows the reason why arrays a zero based. This because it can follow the calculation shown.
