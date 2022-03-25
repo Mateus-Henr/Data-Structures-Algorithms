@@ -1,0 +1,29 @@
+    Stable vs Unstable Sort Algorithms
+
+    What is it?
+    Regarding sort algorithms, we have these two options.
+    They have to do with values that are equal in the data structure that is being sorted.
+    It relates to the position of these values after the sorting.
+
+
+    Unstable Sorts
+    This term implies that the original ordering of the values that are equal will not be preserved.
+    Ex:
+        Unsorted = [5] {9} [3] [9] [8] [4]
+        Sorted =   [3] [4] [5] [8] [9] {9}
+
+
+    Stable Sorts
+    When the relative ordering of duplicate items is preserved.
+    This is preferable over the unstable sort. The reason for that is that if you are doing a "nested" sort, on objects,
+    for example, you might want to sort it by name first, and then sort it by age. Therefore, because on the first sort
+    the positions might flip, it could become a problem for the second sort.
+    Ex:
+        Unsorted = [5] {9} [3] [9] [8] [4]
+        Sorted =   [3] [4] [5] [8] {9} [9]
+
+    Bubble sort in this scenario is a stable sort algorithm since the elements only get swapped if the element that
+    comes previously is greater than the element that comes next. That way, the ordering of duplicate items don't
+    change.
+
+    OBS: You shouldn't transform an algorithm that's originally stable to unstable.
