@@ -135,11 +135,103 @@ package tutorial;
     Nowadays, memory is cheap, but it still needs to take into question.
  */
 
+import java.util.Arrays;
+
 public class Main
 {
     public static void main(String[] args)
     {
+        int[] intArray = {20, 35, -15, 7, 55, 1, -22};
 
+        mergeSort(intArray, 0, intArray.length);
+    }
+
+    private static void mergeSort(int[] input, int start, int end)
+    {
+        // Breaking condition for recursion
+        if ((end - start) < 2)
+        {
+            return;
+        }
+
+        int mid = (start + end) / 2;
+
+        System.out.println("Splitting left");
+        for (int k = start; k < mid; k++)
+        {
+            System.out.print("[" + input[k] + "] ");
+        }
+        System.out.println();
+
+        // Recursion rabbit hole
+        mergeSort(input, start, mid);   // When the code goes past this point, it means that the left partition is sorted.
+
+        System.out.println("Splitting right");
+        for (int k = mid; k < end; k++)
+        {
+            System.out.print("[" + input[k] + "] ");
+        }
+        System.out.println();
+
+        mergeSort(input, mid, end);     // And when it gets to this point, the right partition will be sorted.
+
+        // Merging the left and right already sorted partitions, it returns merging the sorted partitions.
+        merge(input, start, mid, end);
+
+        System.out.println("Merging");
+        Arrays.stream(input).forEach(value -> System.out.print("[" + value + "] "));
+        System.out.println("\n");
+    }
+
+    private static void merge(int[] input, int start, int mid, int end)
+    {
+        // One optimization for the algorithm. This is due to the fact that we are always merging sorted arrays, because
+        // of that if the first element on the right side is greater than or equal to the last element on the left side,
+        // it means that all the elements in the left partition are less than or equal to the smallest element in the
+        // right partition (since both are sorted).
+        if (input[mid - 1] <= input[mid])
+        {
+            return;
+        }
+
+        int i = start;
+        int j = mid;
+        int tempIndex = 0; // Keep track of where we are in the temporary array.
+
+        int[] temp = new int[end - start];
+        while (i < mid && j < end)
+        {
+            // The "==" here is because merge sort is stable.
+            // It writes the smallest element to the temp array.
+            temp[tempIndex++] = input[i] <= input[j] ? input[i++] : input[j++];
+        }
+
+        // Handling remaining elements that we haven't been traversed. This is also an optimization.
+        // Ex:
+        // {32, 34},{33, 36}
+        // {32, 33, 34}         We leave the loop here.
+        // Therefore, instead of doing needless work by copying 36 to its same position in the temp array, we will be
+        // handling this scenario. It's also important to know that if we have a leftover element in the right, it means
+        // that that element is greater, being this the reason why it hasn't been copied yet. So we should avoid
+        // "touching" this element both in the temporary array and in the original array.
+        // The same scenario doesn't work in the left array as shown in the example below:
+        // Ex:
+        // {32, 36}, {33, 34}
+        // {32, 33, 34}     36 needs to be handled here since its position changes in the original array.
+        // Due to this, we can only assert that if the element leftover is the last one in the right array, it'll
+        // assume the same position in the original array, so this element doesn't need to be processed.
+
+        // This copies leftover elements directly in the original array.
+        // "mid - i" tells us the number of elements that we haven't copied over to the temp array from the left
+        // partition. If everything is traversed, the result of this operation will be 0, so we won't be doing a copy,
+        // in other words, the code won't execute.
+        // What this method does is: It copies data from one array over to the other array. And the way that we are
+        // going it we are jumping over all the elements in the temp array in the original array, in order to place
+        // the element at the right spot.
+        System.arraycopy(input, i, input, start + tempIndex, mid - i);
+
+        // Copying the elements from the temp array to original array.
+        System.arraycopy(temp, 0, input, start, tempIndex);
     }
 
 }
