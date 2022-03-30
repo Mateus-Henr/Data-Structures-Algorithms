@@ -109,7 +109,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        int[] intArray = {3, 4, 9, 2, 5, 8, 2, 1, 7, 4, 6, 2, 9, 8, 5, 1};
+        int[] intArray = {20, 35, -15, 7, 55, 1, -22};
 
         // Loop for the gap. Notice that we aren't using the Knuth Sequence.
         for (int gap = intArray.length / 2; gap > 0; gap /= 2)
