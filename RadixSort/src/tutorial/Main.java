@@ -51,6 +51,148 @@ package tutorial;
          so, the next step only do some modifications to the previous sort in order to sort it completely.
 
 
+    Counting Sort (Stable)
+    - For a stable version of the counting sort algorithm, extra steps are necessary.
+    - For a better explanation of the counting sort algorithm itself, take a look at the unstable version.
+    - It calculates where values should be written back to the original array.
+    - Writing hte values into the array in backwards order ensures stability.
+
+    How to set the values back to the original array based on the counting sort array (10's position)
+    - We create a temporary array that matches the length of the array being sorted.
+    - We can use the counts to figure out which range of indices in the temporary array will be occupied by each value.
+      For example:
+      "2" - There are two, so they occupy indices 0, and 1.
+      "3" - It occupies the index 2.
+      "8" - It occupies position 3.
+      "9" - They occupy positions 4, and 5.
+
+    How the positions are defined
+    - After the first pass, we adjust the counts. Instead of the number of values that have a specific 10's value,
+      we want ot store how many values have a specific 10's value or less.
+      For example, we want to store 3 at index 3, because 3 values have a 10's value of 3 or less.
+    - We can calculate each adjusted count by adding up the counts up and including the 10's value.
+      After adjusting our counts in this example we would get [0] [0] [2] [3] [3] [3] [3] [3] [4] [6].
+      This because:
+      [0] - 0 0s.                           0 values with 0
+      [0] - 0 1s.                           0 values with 1 or less
+      [2] - 2 2s.                           2 values with 2 or less
+      [3] - 2 2s + 1 3s.                    3 values with 3 or less
+      [3] - 2 2s + 1 3s.                    3 values with 4 or less
+      [3] - 2 2s + 1 3s.                    3 values with 5 or less
+      [3] - 2 2s + 1 3s.                    3 values with 6 or less
+      [3] - 2 2s + 1 3s.                    3 values with 7 or less
+      [4] - 2 2s + 1 3s + 1 8s.             4 values with 8 or less
+      [6] - 2 2s + 1 3s + 1 8s + 2 9s.      6 values with 9 or less
+      By adjusting the counts, we can write out the values in the correct order and preserve the relative positioning
+      of duplicate values.
+    - Notice that the last position will be equal to the number of values that we have.
+
+    Conclusion on stable counting sort
+    - This works because we traverse the input array from right to left, and we write duplicate values into the temp
+      array from right to left.
+    - If we know that duplicate values will go into positions 3 and 4, we write the rightmost value in the input array
+      into position 4, and the leftmost value into position 3.
+    - This preserves the relative positioning of duplicate values.
+    - By adjusting the counting array after the initial pass, we can map values to indices in the temp array.
+    - It's also possible to use linked lists to make counting sort stable.
+
+
+
+    Example
+
+    Array = [4725] [4586] [1330] [8792] [1594] [5729]
+
+    Relation between the counting array and the original array
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9]
+    [0] [0] [0] [0] [0] [0] [0] [0] [0] [0]
+
+    Step 1 (1's position)                                                  | Full array = [5] [6] [0] [2] [4] [9]
+    [0] [0] [0] [0] [0] [1] [0] [0] [0] [0] | Elem = 5
+    [0] [0] [0] [0] [0] [1] [1] [0] [0] [0] | Elem = 6
+    [1] [0] [0] [0] [0] [1] [1] [0] [0] [0] | Elem = 0
+    [1] [0] [1] [0] [0] [1] [1] [0] [0] [0] | Elem = 2
+    [1] [0] [1] [0] [1] [1] [1] [0] [0] [0] | Elem = 4
+    [1] [0] [1] [0] [1] [1] [1] [0] [0] [1] | Elem = 9
+
+    Step 2 (Adjusting array)
+    [1] [1] [2] [2] [3] [4] [5] [5] [5] [6]
+
+    Step 3 (Temp array)                                 | Full array = [4725] [4586] [1330] [8792] [1594] [5729]
+    [0] [0] [0] [0] [0] [5729]                          k = 5 | input[k] = 5729 | countArray[9] = (6 - 1) = 5
+    [0] [0] [1594] [0] [0] [5729]                       k = 4 | input[k] = 1594 | countArray[4] = (3 - 1) = 2
+    [0] [8792] [1594] [0] [0] [5729]                    k = 3 | input[k] = 8792 | countArray[2] = (2 - 1) = 1
+    [1330] [8792] [1594] [0] [0] [5729]                 k = 2 | input[k] = 1330 | countArray[0] = (1 - 1) = 0
+    [1330] [8792] [1594] [0] [4586] [5729]              k = 1 | input[k] = 4586 | countArray[6] = (5 - 1) = 4
+    [1330] [8792] [1594] [4725] [4586] [5729]           k = 0 | input[k] = 4725 | countArray[5] = (4 - 1) = 3
+
+
+    Step 1 (10's position)                                                  | Full array = [3] [9] [9] [2] [8] [2]
+    [0] [0] [0] [1] [0] [0] [0] [0] [0] [0] | Elem = 3
+    [0] [0] [0] [1] [0] [0] [0] [0] [0] [1] | Elem = 9
+    [0] [0] [0] [1] [0] [0] [0] [0] [0] [2] | Elem = 9
+    [0] [0] [1] [1] [0] [0] [0] [0] [0] [2] | Elem = 2
+    [0] [0] [1] [1] [0] [0] [0] [0] [1] [2] | Elem = 8
+    [0] [0] [2] [1] [0] [0] [0] [0] [1] [2] | Elem = 8
+
+    Step 2 (Adjusting array)
+    [0] [0] [2] [3] [3] [3] [3] [3] [4] [6]
+
+    Step 3 (Temp array)                                 | Full array = [1330] [8792] [1594] [4725] [4586] [5729]
+    [0] [5729] [0] [0] [0] [0]                          k = 5 | input[k] = 5729 | countArray[2] = (2 - 1) = 1
+    [0] [5729] [0] [4586] [0] [0]                       k = 4 | input[k] = 4586 | countArray[8] = (4 - 1) = 3
+    [4725] [5729] [0] [4586] [0] [0]                    k = 3 | input[k] = 4725 | countArray[2] = (1 - 1) = 1
+    [4725] [5729] [0] [4586] [0] [1594]                 k = 2 | input[k] = 1594 | countArray[9] = (6 - 1) = 5
+    [4725] [5729] [0] [4586] [8792] [1594]              k = 1 | input[k] = 8792 | countArray[9] = (5 - 1) = 4
+    [4725] [5729] [1330] [4586] [8792] [1594]           k = 0 | input[k] = 1330 | countArray[3] = (3 - 1) = 2
+
+    OBS: It's important to know that once the value is written, we decrement the countArray by one.
+         This is for keeping the algorithm stable when dealing with duplicate values. So the duplicate values will keep
+         their relative positioning.
+
+
+    Step 1 (100's position)                                                 | Full array = [7] [7] [3] [5] [7] [5]
+    [0] [0] [0] [0] [0] [0] [0] [1] [0] [0] | Elem = 7
+    [0] [0] [0] [0] [0] [0] [0] [2] [0] [0] | Elem = 7
+    [0] [0] [0] [1] [0] [0] [0] [2] [0] [0] | Elem = 3
+    [0] [0] [0] [1] [0] [1] [0] [2] [0] [0] | Elem = 5
+    [0] [0] [0] [1] [0] [1] [0] [3] [0] [0] | Elem = 7
+    [0] [0] [0] [1] [0] [2] [0] [3] [0] [0] | Elem = 5
+
+    Step 2 (Adjusting array)
+    [0] [0] [0] [1] [1] [3] [3] [6] [6] [6]
+
+    Step 3 (Temp array)                                 | Full array = [4725] [5729] [1330] [4586] [8792] [1594]
+    [0] [0] [1594] [0] [0] [0]                          k = 5 | input[k] = 1594 | countArray[5] = (3 - 1) = 2
+    [0] [0] [1594] [0] [0] [8792]                       k = 4 | input[k] = 8792 | countArray[7] = (6 - 1) = 5
+    [0] [4586] [1594] [0] [0] [8792]                    k = 3 | input[k] = 4586 | countArray[5] = (2 - 1) = 1
+    [1330] [4586] [1594] [0] [0] [8792]                 k = 2 | input[k] = 1330 | countArray[3] = (1 - 1) = 0
+    [1330] [4586] [1594] [0] [5729] [8792]              k = 1 | input[k] = 5729 | countArray[7] = (5 - 1) = 4
+    [1330] [4586] [1594] [5729] [4725] [8792]           k = 0 | input[k] = 4725 | countArray[7] = (4 - 1) = 3
+
+
+    Step 1 (1000's position)                                                 | Full array = [1] [4] [1] [5] [4] [8]
+    [0] [1] [0] [0] [0] [0] [0] [0] [0] [0] | Elem = 1
+    [0] [1] [0] [0] [1] [0] [0] [0] [0] [0] | Elem = 4
+    [0] [2] [0] [0] [1] [0] [0] [0] [0] [0] | Elem = 1
+    [0] [2] [0] [0] [1] [1] [0] [0] [0] [0] | Elem = 5
+    [0] [2] [0] [0] [2] [1] [0] [0] [0] [0] | Elem = 4
+    [0] [2] [0] [0] [2] [1] [0] [0] [1] [0] | Elem = 8
+
+    Step 2 (Adjusting array)
+    [0] [2] [2] [2] [4] [5] [5] [5] [6] [6]
+
+    Step 3 (Temp array)                                 | Full array = [1330] [4586] [1594] [5729] [4725] [8792]
+    [0] [0] [0] [0] [0] [8792]                          k = 5 | input[k] = 8792 | countArray[8] = (6 - 1) = 5
+    [0] [0] [0] [4725] [0] [8792]                       k = 4 | input[k] = 4725 | countArray[4] = (4 - 1) = 3
+    [0] [0] [0] [4725] [5729] [8792]                    k = 3 | input[k] = 5729 | countArray[5] = (5 - 1) = 4
+    [0] [1594] [0] [4725] [5729] [8792]                 k = 2 | input[k] = 1594 | countArray[1] = (2 - 1) = 1
+    [0] [1594] [4586] [4725] [5729] [8792]              k = 1 | input[k] = 4586 | countArray[4] = (3 - 1) = 2
+    [1330] [1594] [4586] [4725] [5729] [8792]           k = 0 | input[k] = 1330 | countArray[1] = (1 - 1) = 0
+
+    Final array = [1330] [1594] [4586] [4725] [5729] [8792]
+
+
+
     Final conclusion
     - Counting sort (stable version) is often used as the sort algorithm for radix sort.
     - It's possible to achieve O(n) due to the assumptions, but it often runs slower than O(nlogn) algorithms because
@@ -59,18 +201,53 @@ package tutorial;
     - It's a stable algorithm which is also a requirement for this algorithm to work.
  */
 
+import java.util.Arrays;
+
 public class Main
 {
     public static void main(String[] args)
     {
         int[] intArray = {4725, 4586, 1330, 8792, 1594, 5729};
 
-        radixSort();
+        radixSort(intArray, 4, 0, 10);
     }
 
-    private static void radixSort()
+    private static void radixSort(int[] input, int n, int min, int max)
     {
+        for (int j = 1; j <= n; j++)
+        {
+            int[] countArray = new int[max - min];
 
+            System.out.println("Step 1 (1's position)");
+            for (int i : input)
+            {
+                countArray[getDigit(i, j) - min]++;
+                Arrays.stream(countArray).forEach(value -> System.out.print("[" + value + "] "));
+                System.out.println();
+            }
+
+            System.out.println("\nStep 2 (Adjusting array)");
+            for (int i = 1; i < countArray.length; i++)
+            {
+                countArray[i] += countArray[i - 1];
+                Arrays.stream(countArray).forEach(value -> System.out.print("[" + value + "] "));
+                System.out.println();
+            }
+
+//        int[] tmp = new int[n];
+//
+//        System.out.println("\nStep 3 (Temp array)");
+//        // Starting from the rightmost digit.
+//        for (int k = n - 1; k >= 0; k--)
+//        {
+//            tmp[--countArray[getDigit(position, input[k], radix)]] = input[k];
+//        }
+        }
+    }
+
+    private static int getDigit(int number, int k)
+    {
+        return (number / (int) Math.pow(10, k - 1)) % 10;
     }
 
 }
