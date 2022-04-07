@@ -114,7 +114,15 @@ package tutorial;
     [1] [0] [1] [0] [1] [1] [1] [0] [0] [0] | Elem = 4
     [1] [0] [1] [0] [1] [1] [1] [0] [0] [1] | Elem = 9
 
-    Step 2 (Adjusting array)
+    Step 2 (Adjusting count array)
+    [1] [1] [1] [0] [1] [1] [1] [0] [0] [1]
+    [1] [1] [2] [0] [1] [1] [1] [0] [0] [1]
+    [1] [1] [2] [2] [1] [1] [1] [0] [0] [1]
+    [1] [1] [2] [2] [3] [1] [1] [0] [0] [1]
+    [1] [1] [2] [2] [3] [4] [1] [0] [0] [1]
+    [1] [1] [2] [2] [3] [4] [5] [0] [0] [1]
+    [1] [1] [2] [2] [3] [4] [5] [5] [0] [1]
+    [1] [1] [2] [2] [3] [4] [5] [5] [5] [1]
     [1] [1] [2] [2] [3] [4] [5] [5] [5] [6]
 
     Step 3 (Temp array)                                 | Full array = [4725] [4586] [1330] [8792] [1594] [5729]
@@ -134,7 +142,15 @@ package tutorial;
     [0] [0] [1] [1] [0] [0] [0] [0] [1] [2] | Elem = 8
     [0] [0] [2] [1] [0] [0] [0] [0] [1] [2] | Elem = 8
 
-    Step 2 (Adjusting array)
+    Step 2 (Adjusting count array)
+    [0] [0] [2] [1] [0] [0] [0] [0] [1] [2]
+    [0] [0] [2] [1] [0] [0] [0] [0] [1] [2]
+    [0] [0] [2] [3] [0] [0] [0] [0] [1] [2]
+    [0] [0] [2] [3] [3] [0] [0] [0] [1] [2]
+    [0] [0] [2] [3] [3] [3] [0] [0] [1] [2]
+    [0] [0] [2] [3] [3] [3] [3] [0] [1] [2]
+    [0] [0] [2] [3] [3] [3] [3] [3] [1] [2]
+    [0] [0] [2] [3] [3] [3] [3] [3] [4] [2]
     [0] [0] [2] [3] [3] [3] [3] [3] [4] [6]
 
     Step 3 (Temp array)                                 | Full array = [1330] [8792] [1594] [4725] [4586] [5729]
@@ -158,7 +174,15 @@ package tutorial;
     [0] [0] [0] [1] [0] [1] [0] [3] [0] [0] | Elem = 7
     [0] [0] [0] [1] [0] [2] [0] [3] [0] [0] | Elem = 5
 
-    Step 2 (Adjusting array)
+    Step 2 (Adjusting count array)
+    [0] [0] [0] [1] [0] [2] [0] [3] [0] [0]
+    [0] [0] [0] [1] [0] [2] [0] [3] [0] [0]
+    [0] [0] [0] [1] [0] [2] [0] [3] [0] [0]
+    [0] [0] [0] [1] [1] [2] [0] [3] [0] [0]
+    [0] [0] [0] [1] [1] [3] [0] [3] [0] [0]
+    [0] [0] [0] [1] [1] [3] [3] [3] [0] [0]
+    [0] [0] [0] [1] [1] [3] [3] [6] [0] [0]
+    [0] [0] [0] [1] [1] [3] [3] [6] [6] [0]
     [0] [0] [0] [1] [1] [3] [3] [6] [6] [6]
 
     Step 3 (Temp array)                                 | Full array = [4725] [5729] [1330] [4586] [8792] [1594]
@@ -178,7 +202,15 @@ package tutorial;
     [0] [2] [0] [0] [2] [1] [0] [0] [0] [0] | Elem = 4
     [0] [2] [0] [0] [2] [1] [0] [0] [1] [0] | Elem = 8
 
-    Step 2 (Adjusting array)
+    Step 2 (Adjusting count array)
+    [0] [2] [0] [0] [2] [1] [0] [0] [1] [0]
+    [0] [2] [2] [0] [2] [1] [0] [0] [1] [0]
+    [0] [2] [2] [2] [2] [1] [0] [0] [1] [0]
+    [0] [2] [2] [2] [4] [1] [0] [0] [1] [0]
+    [0] [2] [2] [2] [4] [5] [0] [0] [1] [0]
+    [0] [2] [2] [2] [4] [5] [5] [0] [1] [0]
+    [0] [2] [2] [2] [4] [5] [5] [5] [1] [0]
+    [0] [2] [2] [2] [4] [5] [5] [5] [6] [0]
     [0] [2] [2] [2] [4] [5] [5] [5] [6] [6]
 
     Step 3 (Temp array)                                 | Full array = [1330] [4586] [1594] [5729] [4725] [8792]
@@ -209,45 +241,66 @@ public class Main
     {
         int[] intArray = {4725, 4586, 1330, 8792, 1594, 5729};
 
-        radixSort(intArray, 4, 0, 10);
+        radixSort(intArray, 10, 4);
+
+        System.out.println("Final array");
+        Arrays.stream(intArray).forEach(value -> System.out.print("[" + value + "] "));
+        System.out.println();
     }
 
-    private static void radixSort(int[] input, int n, int min, int max)
+    private static void radixSort(int[] input, int radix, int width)
     {
-        for (int j = 1; j <= n; j++)
+        // Calling the single sort for each position in the elements. Starting from the most significant digit.
+        for (int i = 0; i < width; i++)
         {
-            int[] countArray = new int[max - min];
-
-            System.out.println("Step 1 (1's position)");
-            for (int i : input)
-            {
-                countArray[getDigit(i, j) - min]++;
-                Arrays.stream(countArray).forEach(value -> System.out.print("[" + value + "] "));
-                System.out.println();
-            }
-
-            System.out.println("\nStep 2 (Adjusting array)");
-            for (int i = 1; i < countArray.length; i++)
-            {
-                countArray[i] += countArray[i - 1];
-                Arrays.stream(countArray).forEach(value -> System.out.print("[" + value + "] "));
-                System.out.println();
-            }
-
-//        int[] tmp = new int[n];
-//
-//        System.out.println("\nStep 3 (Temp array)");
-//        // Starting from the rightmost digit.
-//        for (int k = n - 1; k >= 0; k--)
-//        {
-//            tmp[--countArray[getDigit(position, input[k], radix)]] = input[k];
-//        }
+            radixSingleSort(input, i, radix);
         }
     }
 
-    private static int getDigit(int number, int k)
+    private static void radixSingleSort(int[] input, int position, int radix)
     {
-        return (number / (int) Math.pow(10, k - 1)) % 10;
+        int numItems = input.length;
+
+        int[] countArray = new int[radix];
+
+        System.out.println("Step 1 (1's position)");
+        for (int value : input)
+        {
+            countArray[getDigit(position, value, radix)]++;
+            Arrays.stream(countArray).forEach(elem -> System.out.print("[" + elem + "] "));
+            System.out.println();
+        }
+
+        // Creating step that makes the algorithm stable.
+        System.out.println("\nStep 2 (Adjusting count array)");
+        for (int j = 1; j < countArray.length; j++)
+        {
+            countArray[j] += countArray[j - 1];
+            Arrays.stream(countArray).forEach(value -> System.out.print("[" + value + "] "));
+            System.out.println();
+        }
+
+        int[] temp = new int[numItems];
+
+        System.out.println("\nStep 3 (Temp array)");
+        // Starting at the end
+        for (int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--)
+        {
+            temp[--countArray[getDigit(position, input[tempIndex], radix)]] = input[tempIndex];
+            Arrays.stream(temp).forEach(value -> System.out.print("[" + value + "] "));
+            System.out.println("");
+        }
+        System.out.println("\n");
+
+        for (int tempIndex = 0; tempIndex < numItems; tempIndex++)
+        {
+            input[tempIndex] = temp[tempIndex];
+        }
+    }
+
+    private static int getDigit(int position, int value, int radix)
+    {
+        return (value / (int) Math.pow(radix, position)) % radix; // Ex: 4567 / (10^2) = 45 % 10 = 5
     }
 
 }
