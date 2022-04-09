@@ -159,57 +159,66 @@ public class Main
         Employee mikeWilson = new Employee(67535461, "Mike", "Wilson");
         Employee michaelLoy = new Employee(54654657, "Michael", "Loy");
         Employee hermanLouis = new Employee(76575455, "Herman", "Louis");
+        Employee ryanOwen = new Employee(43253463, "Ryan", "Owen");
 
         EmployeeDoublyLinkedList list = new EmployeeDoublyLinkedList();
 
 
         // Insertions
-        System.out.println("Inserting 2 employees at the front of the list - Size = " + list.getSize());
+        System.out.println("Inserting 2 employees at the front of the list");
         list.insertToFront(janeJones);
         list.insertToFront(johnDoe);
         list.printListFromHead();
 
-        System.out.println("\nInserting employee at the end of the list - Size = " + list.getSize());
+        System.out.println("\nInserting employee at the end of the list");
         list.insertToEnd(michaelLoy);
         list.printListFromHead();
 
-        System.out.println("\nInserting employee at index 1 - Size = " + list.getSize());
+        System.out.println("\nInserting employee at index 1");
         list.insertAtIndex(1, mikeWilson);
         list.printListFromHead();
 
-        System.out.println("\nInserting employee at index 0 (head) - Size = " + list.getSize());
+        System.out.println("\nInserting employee at index 0 (head)");
         list.insertAtIndex(0, marySmith);
         list.printListFromHead();
 
-        System.out.println("\nInserting employee at index 4 (tail) - Size = " + list.getSize());
-        list.insertAtIndex(4, hermanLouis);
+        System.out.println("\nInserting employee at index 4 (before the tail)");
+        list.insertAtIndex(4, ryanOwen);
+        list.printListFromHead();
+
+        System.out.println("\nInserting employee at index 6 (tail)");
+        list.insertAtIndex(6, hermanLouis);
         list.printListFromHead();
 
 
         // Removals
-        System.out.println("\nRemoving employee at the front of the list - Size = " + list.getSize());
+        System.out.println("\nRemoving employee at the front of the list");
         list.removeFromFront();
         list.printListFromTail();
 
-        System.out.println("\nRemoving employee at the end of the list - Size = " + list.getSize());
+        System.out.println("\nRemoving employee at the end of the list");
         list.removeFromEnd();
         list.printListFromTail();
 
-        System.out.println("\nRemoving employee at index 1 - Size = " + list.getSize());
+        System.out.println("\nRemoving employee at index 1");
         list.removeAtIndex(1);
         list.printListFromTail();
 
-        System.out.println("\nRemoving employee at index 0 (head) - Size = " + list.getSize());
+        System.out.println("\nRemoving employee at index 0 (head)");
         list.removeAtIndex(0);
         list.printListFromTail();
 
-        System.out.println("\nRemoving employee at index 1 (tail) - Size = " + list.getSize());
+        System.out.println("\nRemoving employee at index 1 (before the tail)");
+        list.removeAtIndex(1);
+        list.printListFromTail();
+
+        System.out.println("\nRemoving employee at index 1 (tail)");
         list.removeAtIndex(1);
         list.printListFromTail();
 
 
         // Others
-        System.out.println("Is empty = " + list.isEmpty());
+        System.out.println("\nIs empty = " + list.isEmpty());
         System.out.println("Size = " + list.getSize());
     }
 

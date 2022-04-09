@@ -60,12 +60,12 @@ public class EmployeeDoublyLinkedList
         EmployeeNode newNode = new EmployeeNode(employeeToAdd);
         EmployeeNode employeeAtPosition = searchEmployee(position);
 
-        if (employeeAtPosition == null)
+        if (employeeAtPosition == null && position != size)
         {
             return;
         }
 
-        if (employeeAtPosition.getNextNode() == null)
+        if (position == size)
         {
             insertToEnd(employeeToAdd);
         }
