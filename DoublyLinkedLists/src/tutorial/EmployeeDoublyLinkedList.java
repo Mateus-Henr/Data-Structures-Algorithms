@@ -6,13 +6,6 @@ public class EmployeeDoublyLinkedList
     private EmployeeNode tail;
     private int size;
 
-    public EmployeeDoublyLinkedList()
-    {
-        this.head = null;
-        this.tail = null;
-        size = 0;
-    }
-
     public void insertToFront(Employee employeeToAdd)
     {
         EmployeeNode newNode = new EmployeeNode(employeeToAdd);
@@ -23,14 +16,11 @@ public class EmployeeDoublyLinkedList
         }
         else
         {
-            newNode.setNextNode(head);
-            newNode.setPreviousNode(head.getPreviousNode());
-
             head.setPreviousNode(newNode);
+            newNode.setNextNode(head);
         }
 
         head = newNode;
-
         size++;
     }
 
@@ -44,14 +34,11 @@ public class EmployeeDoublyLinkedList
         }
         else
         {
-            newNode.setPreviousNode(tail);
-            newNode.setNextNode(tail.getNextNode());
-
             tail.setNextNode(newNode);
+            newNode.setPreviousNode(tail);
         }
 
         tail = newNode;
-
         size++;
     }
 
@@ -62,6 +49,7 @@ public class EmployeeDoublyLinkedList
         if (position == size)
         {
             insertToEnd(employeeToAdd);
+            return;
         }
 
         EmployeeNode employeeAtPosition = searchEmployee(position);
@@ -97,8 +85,17 @@ public class EmployeeDoublyLinkedList
 
         EmployeeNode nodeToRemove = head;
 
+        // Testing to see if we are removing the only node in the list
+        if (head.getNextNode() == null)
+        {
+            tail = null;
+        }
+        else
+        {
+            head.getNextNode().setPreviousNode(null);
+        }
+
         head = head.getNextNode();
-        head.setPreviousNode(nodeToRemove.getPreviousNode());
 
         nodeToRemove.setNextNode(null);
         size--;
@@ -115,8 +112,16 @@ public class EmployeeDoublyLinkedList
 
         EmployeeNode nodeToRemove = tail;
 
+        if (tail.getPreviousNode() == null) // Checking if there's only one element,
+        {
+            head = null;
+        }
+        else
+        {
+            tail.getPreviousNode().setNextNode(null);
+        }
+
         tail = tail.getPreviousNode();
-        tail.setNextNode(nodeToRemove.getNextNode());
 
         nodeToRemove.setPreviousNode(null);
         size--;
@@ -172,11 +177,10 @@ public class EmployeeDoublyLinkedList
         }
 
         EmployeeNode currNode;
-        int control;
 
         if (position <= ((size / 2) - 1))
         {
-            control = 0;
+            int control = 0;
             currNode = head;
 
             while (control != position)
@@ -187,7 +191,7 @@ public class EmployeeDoublyLinkedList
         }
         else
         {
-            control = size - 1;
+            int control = size - 1;
             currNode = tail;
 
             while (control != position)
@@ -207,7 +211,7 @@ public class EmployeeDoublyLinkedList
         while (currNode != null)
         {
             System.out.print(currNode);
-            System.out.print(" -> ");
+            System.out.print(" <=> ");
             currNode = currNode.getNextNode();
         }
         System.out.println("TAIL");
@@ -220,7 +224,7 @@ public class EmployeeDoublyLinkedList
         while (currNode != null)
         {
             System.out.print(currNode);
-            System.out.print(" -> ");
+            System.out.print(" <=> ");
             currNode = currNode.getPreviousNode();
         }
         System.out.println("HEAD");
