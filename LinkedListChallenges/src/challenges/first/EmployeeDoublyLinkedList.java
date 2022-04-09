@@ -48,6 +48,13 @@ public class EmployeeDoublyLinkedList
         // if the existing employee doesn't exist in the list
 
         // add your code here
+
+        // Checking if list is empty
+        if (head == null)
+        {
+            return false;
+        }
+
         EmployeeNode foundEmployee = searchEmployee(existingEmployee);
 
         if (foundEmployee == null)
@@ -55,20 +62,23 @@ public class EmployeeDoublyLinkedList
             return false;
         }
 
-        // Checking if previous element is the beginning of the list.
-        if (foundEmployee.getPrevious() == null)
+        EmployeeNode newEmployeeNode = new EmployeeNode(newEmployee);
+
+        newEmployeeNode.setPrevious(foundEmployee.getPrevious());
+        newEmployeeNode.setNext(foundEmployee);
+        foundEmployee.setPrevious(newEmployeeNode);
+
+        // Checking if the element is the beginning of the list.
+        if (newEmployeeNode.getPrevious() == null)
         {
-            addToFront(newEmployee);
+            head = newEmployeeNode;
         }
         else
         {
-            EmployeeNode newEmployeeNode = new EmployeeNode(newEmployee);
-
-            foundEmployee.getPrevious().setNext(newEmployeeNode);
-            foundEmployee.setPrevious(newEmployeeNode);
-            newEmployeeNode.setPrevious(foundEmployee.getPrevious());
-            newEmployeeNode.setNext(foundEmployee);
+            newEmployeeNode.getPrevious().setNext(newEmployeeNode);
         }
+
+        size++;
 
         return true;
     }
@@ -123,20 +133,19 @@ public class EmployeeDoublyLinkedList
 
     private EmployeeNode searchEmployee(Employee employeeToSearchFor)
     {
-        EmployeeNode current = head;
-        EmployeeNode foundEmployee = null;
-
-        while (current != null)
+        if (isEmpty())
         {
-            if (current.getEmployee().equals(employeeToSearchFor))
-            {
-                foundEmployee = current;
-            }
+            return null;
+        }
 
+        EmployeeNode current = head;
+
+        while (current != null && !current.getEmployee().equals(employeeToSearchFor))
+        {
             current = current.getNext();
         }
 
-        return foundEmployee;
+        return current;
     }
 
     public int getSize()
