@@ -49,35 +49,39 @@ package tutorial;
         [Jane] [John] [Mary] [Mike]
 
     Singly liked list representation
-               Head                EmployeeNode              EmployeeNode             EmployeeNode
-         [Jane | EmployeeNode@454a] [John | EmployeeNode@455a] [Mary | EmployeeNode@456a] [Mike | NULL]
-              EmployeeNode@453a          EmployeeNode@454a         EmployeeNode@455a        EmployeeNode@456a
+                Head           EmployeeNode       EmployeeNode     EmployeeNode
+         [Jane | Node@454a] [John | Node@455a] [Mary | Node@456a] [Mike | NULL]
+              Node@453a          Node@454a         Node@455a        Node@456a
 
+    ------------------------------------------------------------------------------------------------------------------
 
     Insertion example
 
     Initial linked list
-               Head                EmployeeNode              EmployeeNode             EmployeeNode
-         [Jane | EmployeeNode@454a] [John | EmployeeNode@455a] [Mary | EmployeeNode@456a] [Mike | NULL]
-              EmployeeNode@453a          EmployeeNode@454a         EmployeeNode@455a        EmployeeNode@456a
+                Head           EmployeeNode       EmployeeNode     EmployeeNode
+         [Jane | Node@454a] [John | Node@455a] [Mary | Node@456a] [Mike | NULL]
+              Node@453a          Node@454a         Node@455a        Node@456a
 
     Inserting "Bill"
-               Head                EmployeeNode              EmployeeNode             EmployeeNode
-         [Bill | EmployeeNode@453a] [Jane | EmployeeNode@454a] [John | EmployeeNode@455a] [Mary | EmployeeNode@456a] [Mike | NULL]
-             EmployeeNode@452a           EmployeeNode@453a          EmployeeNode@454a         EmployeeNode@455a        EmployeeNode@456a
+                Head           EmployeeNode       EmployeeNode     EmployeeNode
+         [Bill | Node@453a] [Jane | Node@454a] [John | Node@455a] [Mary | Node@456a] [Mike | NULL]
+             Node@452a           Node@453a          Node@454a         Node@455a        Node@456a
 
+    ------------------------------------------------------------------------------------------------------------------
 
     Deletion example
 
     Initial linked list
-               Head                EmployeeNode              EmployeeNode             EmployeeNode
-         [Jane | EmployeeNode@454a] [John | EmployeeNode@455a] [Mary | EmployeeNode@456a] [Mike | NULL]
-              EmployeeNode@453a          EmployeeNode@454a         EmployeeNode@455a        EmployeeNode@456a
+                Head           EmployeeNode       EmployeeNode     EmployeeNode
+         [Jane | Node@454a] [John | Node@455a] [Mary | Node@456a] [Mike | NULL]
+              Node@453a          Node@454a         Node@455a        Node@456a
 
     Inserting "Bill"
-               Head                EmployeeNode              EmployeeNode             EmployeeNode
-         [Jane | EmployeeNode@454a] [John | EmployeeNode@455a] [Mary | EmployeeNode@456a] [Mike | NULL]
-              EmployeeNode@453a          EmployeeNode@454a         EmployeeNode@455a        EmployeeNode@456a
+                Head           EmployeeNode       EmployeeNode     EmployeeNode
+         [Jane | Node@454a] [John | Node@455a] [Mary | Node@456a] [Mike | NULL]
+              Node@453a          Node@454a         Node@455a        Node@456a
+
+    ------------------------------------------------------------------------------------------------------------------
 
     Final conclusion
     - It differs from arrays since insertion and deletion (from the start of the list) are made in constant time (O(1)).
