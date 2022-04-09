@@ -58,18 +58,20 @@ public class EmployeeDoublyLinkedList
     public void insertAtIndex(int position, Employee employeeToAdd)
     {
         EmployeeNode newNode = new EmployeeNode(employeeToAdd);
-        EmployeeNode employeeAtPosition = searchEmployee(position);
-
-        if (employeeAtPosition == null && position != size)
-        {
-            return;
-        }
 
         if (position == size)
         {
             insertToEnd(employeeToAdd);
         }
-        else if (employeeAtPosition.getPreviousNode() == null)
+
+        EmployeeNode employeeAtPosition = searchEmployee(position);
+
+        if (employeeAtPosition == null)
+        {
+            return;
+        }
+
+        if (employeeAtPosition.getPreviousNode() == null)
         {
             insertToFront(employeeToAdd);
         }
