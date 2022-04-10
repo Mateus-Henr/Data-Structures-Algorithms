@@ -59,21 +59,19 @@ public class EmployeeDoublyLinkedList
             return;
         }
 
-        if (employeeAtPosition.getPreviousNode() == null)
+        newNode.setPreviousNode(employeeAtPosition.getPreviousNode());
+        newNode.setNextNode(employeeAtPosition);
+        employeeAtPosition.setPreviousNode(newNode);
+
+        if (newNode.getPreviousNode() == null)
         {
-            insertToFront(employeeToAdd);
+            head = newNode;
         }
         else
         {
-            EmployeeNode beforeEmployee = employeeAtPosition.getPreviousNode();
-
-            newNode.setPreviousNode(beforeEmployee);
-            newNode.setNextNode(employeeAtPosition);
-
-            beforeEmployee.setNextNode(newNode);
-            employeeAtPosition.setPreviousNode(newNode);
-            size++;
+            newNode.getPreviousNode().setNextNode(newNode);
         }
+        size++;
     }
 
     public EmployeeNode removeFromFront()
