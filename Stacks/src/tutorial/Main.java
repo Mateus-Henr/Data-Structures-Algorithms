@@ -97,7 +97,28 @@ public class Main
 {
     public static void main(String[] args)
     {
-        
+        ArrayStack stack = new ArrayStack(10);
+
+        // Using "push()"
+        stack.push(new Employee(13435434, "Jane", "Jones"));
+        stack.push(new Employee(54546587, "John", "Doe"));
+        stack.push(new Employee(76897876, "Mary", "Smith"));
+        stack.push(new Employee(67535461, "Mike", "Wilson"));
+        stack.push(new Employee(53564645, "Bill", "End"));
+
+        // Printing the stack
+        System.out.println("Printing the stack");
+        stack.printStack();
+
+        // Using "peek()"
+        System.out.println("\nPeeking the stack");
+        System.out.println("Peek = " + stack.peek());
+        stack.printStack();
+
+        // Using "pop()"
+        System.out.println("\nPopping item");
+        System.out.println("Popped = " + stack.pop());
+        System.out.println("Peek = " + stack.peek());
     }
 
 }
