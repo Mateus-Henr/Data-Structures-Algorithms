@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.array;
 
 import java.util.EmptyStackException;
 

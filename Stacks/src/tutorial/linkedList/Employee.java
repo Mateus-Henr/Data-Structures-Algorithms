@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.linkedList;
 
 public class Employee
 {

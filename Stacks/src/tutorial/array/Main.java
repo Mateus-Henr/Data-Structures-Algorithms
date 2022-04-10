@@ -1,6 +1,6 @@
-package tutorial;
+package tutorial.array;
 
-/*  Stacks
+/*  Stacks (Array)
 
     • They dictate what operations we can do on the items. They are also known as an abstract data type.
     • LIFO (Last In, First Out). Therefore, NO RANDOM ACCESS.
