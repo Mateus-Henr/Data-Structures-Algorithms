@@ -1,7 +1,5 @@
 package challenges.second;
 
-import challenges.first.Employee;
-
 public class IntegerLinkedList
 {
     private IntegerNode head;
