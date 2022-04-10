@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.array;
 
 /*  Queues
 
@@ -59,7 +59,52 @@ public class Main
 {
     public static void main(String[] args)
     {
+        Employee janeJones = new Employee(13435434, "Jane", "Jones");
+        Employee johnDoe = new Employee(54546587, "John", "Doe");
+        Employee marySmith = new Employee(76897876, "Mary", "Smith");
+        Employee mikeWilson = new Employee(67535461, "Mike", "Wilson");
+        Employee billEnd = new Employee(45645657, "Bill", "End");
 
+        ArrayQueue queue = new ArrayQueue(10);
+
+        // Enqueueing elements.
+        queue.enqueue(janeJones);
+        queue.enqueue(johnDoe);
+        queue.enqueue(marySmith);
+        queue.enqueue(mikeWilson);
+        queue.enqueue(billEnd);
+
+        // Printing queue.
+        System.out.println("Printing queue");
+        queue.printQueue();
+
+        // Dequeueing employees.
+        System.out.println("\nDequeueing employees");
+        queue.dequeue();
+        queue.dequeue();
+        queue.printQueue();
+
+        // Peeking on the queue.
+        System.out.println("\nPeeking on the queue");
+        System.out.println("PEEK = " + queue.peek());
+        queue.printQueue();
+
+        // Dequeueing the rest of the employees.
+        System.out.println("\nDequeueing all the employees");
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.printQueue();
+
+        // Checking if the resizing is working
+        System.out.println("\nEnqueueing employee to check queue resizing");
+        queue.enqueue(mikeWilson);
+        queue.printQueue();
+
+        // Dequeueing with no elements
+        System.out.println("\nDequeueing with no elements");
+        queue.dequeue();
+        queue.dequeue();
     }
 
 }
