@@ -82,7 +82,7 @@ public class ArrayQueue
 
     public boolean isEmpty()
     {
-        return (back - front) == 0;
+        return size() == 0;
     }
 
     public int size()
