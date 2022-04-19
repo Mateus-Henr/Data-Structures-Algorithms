@@ -57,12 +57,39 @@ package tutorial;
     1. Provide the key "Jones".
     2. Use the same hash function to map "Jones" to an int (so, we get the value 4).
     3. Retrieve the value at array[4] -> "Jane Jones".
+
+
+    Final conclusion
+    - The load factor is super important when it comes to the retrieval because if the load factor is too high,
+      the hashing function gets too many collisions, so the retrieval won't happen in constant time.
+    - Really handy if you want operations to happen in constant time.
+    - They key can be whatever you want.
+    - The same hash function has to be shared between its methods.
  */
 
 public class Main
 {
     public static void main(String[] args)
     {
+        Employee janeJones = new Employee(13435434, "Jane", "Jones");
+        Employee johnDoe = new Employee(54546587, "John", "Doe");
+        Employee marySmith = new Employee(76897876, "Mary", "Smith");
+        Employee mikeWilson = new Employee(67535461, "Mike", "Wilson");
+        Employee billEnd = new Employee(54353453, "Bill", "End");
 
+        SimpleHashtable ht = new SimpleHashtable();
+
+        ht.put(janeJones.getLastName(), janeJones);
+        ht.put(johnDoe.getLastName(), johnDoe);
+        ht.put(mikeWilson.getLastName(), mikeWilson);
+
+        // This will cause a collision since her name has the same number of characters as "janeJones", and we are using
+        // the number of characters to determine where she would go in the array that backs the hashtable.
+        ht.put(marySmith.getLastName(), marySmith);
+
+        ht.printHashtable();
+
+        System.out.println("Retrieve key Wilson: " + ht.get("Wilson"));
     }
+
 }
