@@ -25,6 +25,13 @@ package tutorial;
       for the item. So we have a O(n) algorithm for operations when using linear probing.
     • The load factor also interferes here, if it's too high, a lot of probes are going to be necessary to find an empty
       spot.
+    • It's important to notice that if you have a decent hashing function and a reasonable load factor, you would have
+      to use less linear probing, which would be the best scenario to use it.
+
+
+    Curiosity
+    • Another variation of linear probing is quadratic probing. Using this variation, instead of incrementing the prob
+      by one, it would be incremented by some constant squared.
  */
 
 public class Main

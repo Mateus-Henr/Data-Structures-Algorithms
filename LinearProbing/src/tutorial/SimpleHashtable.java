@@ -49,7 +49,7 @@ public class SimpleHashtable
         }
     }
 
-    public Employee remove(String key)
+    public Employee remove(String key) // O(n)
     {
         int foundKey = hashKey(key);
 
@@ -61,6 +61,17 @@ public class SimpleHashtable
         Employee removedEmployee = hashtable[foundKey].employee;
 
         hashtable[foundKey] = null;
+
+        StoredEmployee[] oldHashtable = hashtable;
+        hashtable = new StoredEmployee[oldHashtable.length];
+
+        for (StoredEmployee storedEmployee : oldHashtable)
+        {
+            if (storedEmployee != null)
+            {
+                put(storedEmployee.key, storedEmployee.employee);
+            }
+        }
 
         return removedEmployee;
     }
@@ -96,16 +107,24 @@ public class SimpleHashtable
         // we would never find the employee that we were looking for since it would hit a "null".
 //        while ((hashedKey != stopIndex) && (hashtable[hashedKey] != null) && (hashtable[hashedKey].key.equals(key)))
 
-        // Implementation O(n)
-        while (hashedKey != stopIndex)
-        {
-            if ((hashtable[hashedKey] != null) && (hashtable[hashedKey].key.equals(key)))
-            {
-                return hashedKey;
-            }
+        // Implementation O(n) NOT FEASIBLE SINCE THIS METHOD WOULD HAVE A O(n).
+//        while (hashedKey != stopIndex)
+//        {
+//            if ((hashtable[hashedKey] != null) && (hashtable[hashedKey].key.equals(key)))
+//            {
+//                return hashedKey;
+//            }
+//
+//            hashedKey = (hashedKey + 1) % hashtable.length;
+//        }
 
-            hashedKey = (hashedKey + 1) % hashtable.length;
-        }
+        // The problem above could be solved either by rehashing all the items after removing an item (therefore we
+        // wouldn't have a null position between items that used linear probing), it would make the remove method O(n),
+        // or we could set the "Employee" object in the "StoredEmployee" class, so it would help us to identify whether
+        // an employee was at that position or if that was always empty. The disadvantage of this second fix is that
+        // we would have a polluted hash table and the load factor would be higher. So the add method would have to do
+        // more linear probing because we never remove anything from the table.
+        // We will be implementing the remove one.
 
         return -1;
     }
