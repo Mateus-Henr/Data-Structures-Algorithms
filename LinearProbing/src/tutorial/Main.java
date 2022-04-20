@@ -17,6 +17,7 @@ package tutorial;
       that, every increment to the index is called a prob. So if we have to increment the index two times we have to use
       two probes.
     • Due to that, the lower the number of probes the better.
+    • The item always go in the first available position.
 
 
     Final conclusion
@@ -47,6 +48,14 @@ public class Main
         ht.printHashtable();
 
         System.out.println("Retrieve key Wilson: " + ht.get("Wilson"));
+        System.out.println("Retrieve key Smith: " + ht.get("Smith"));
+
+        ht.remove("Wilson");
+        ht.remove("Jones");
+
+        System.out.println("\nAfter removal");
+        ht.printHashtable();
+
         System.out.println("Retrieve key Smith: " + ht.get("Smith"));
     }
 

@@ -88,21 +88,26 @@ public class SimpleHashtable
 
         int stopIndex = hashedKey;
 
-        if (hashedKey == hashtable.length - 1)
-        {
-            hashedKey = 0;
-        }
-        else
-        {
-            hashedKey++;
-        }
+        hashedKey = (hashedKey == hashtable.length - 1) ? 0 : hashedKey + 1;
 
-        while ((hashedKey != stopIndex) && (hashtable[hashedKey] != null) && (!hashtable[hashedKey].key.equals(key)))
+        // There was a bug when looping out on the first null spot. Due to the fact that we can remove an employee
+        // (and we set the employee's spot as null), if we remove the employee at the hashed index and the employee
+        // that we are trying to retrieve was using linear probing from the index of the removed employee
+        // we would never find the employee that we were looking for since it would hit a "null".
+//        while ((hashedKey != stopIndex) && (hashtable[hashedKey] != null) && (hashtable[hashedKey].key.equals(key)))
+
+        // Implementation O(n)
+        while (hashedKey != stopIndex)
         {
+            if ((hashtable[hashedKey] != null) && (hashtable[hashedKey].key.equals(key)))
+            {
+                return hashedKey;
+            }
+
             hashedKey = (hashedKey + 1) % hashtable.length;
         }
 
-        return ((hashtable[hashedKey] != null) && (hashtable[hashedKey].key.equals(key))) ? hashedKey : -1;
+        return -1;
     }
 
     private int hashKey(String key)
