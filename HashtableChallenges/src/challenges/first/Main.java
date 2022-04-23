@@ -1,6 +1,6 @@
 package challenges.first;
 
-/*  Hashtables Challenge #1
+/*  Hashtables - Challenge #1
 
     • Write the hashing function for this challenge.
  */
