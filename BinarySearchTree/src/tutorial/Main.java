@@ -61,8 +61,9 @@ package tutorial;
             [15]     [22]    [26]         [30]
                                       [29]    [32]
 
-    To build the above tree we do the following (the node insertion matters):
-    Insert 25, 20, 15, 27, 30, 29, 26, 22, 32
+    Notice that the insertion order matters, for that reason to build the tree above we have:
+    Insertion order = 25, 20, 15, 27, 30, 29, 26, 22, 32.
+
 
     Insertion
 
@@ -133,6 +134,40 @@ package tutorial;
                 [20]
             [15]
         [10]
+
+
+    Traversing a tree
+    When it comes to trees, we "visit" their nodes.
+    To traverse a tree, we have at our disposal four ways:
+        • Level - Visit nodes on each level from left to right. So we start on level 0 (the root), then level 1, and so
+                  on. Not used very often.
+        • Pre-order - Visit the root of every subtree first. We start from the root. It starts from the root, visits its
+                      entire left subtree and then visits its right subtree.
+        • Post-order - Visit the root of every subtree last. We start from the leaf. It starts from the left most leaf
+                       and goes to the right most leaf.
+        • In-order - Visit left child, then root, then right child for every node. It gives us the values in ascending
+                     order (that's why it's called an in-order), so it's really easy to sort the data after inserting it
+                     to a binary search tree. If you had an array, inserting its values into a binary search tree and
+                     getting the data sorted, it's faster than some sorting algorithms.
+
+
+    Tree for traversal representations
+                        [25]
+                [20]               [27]
+            [15]     [22]    [26]         [30]
+                                      [29]    [32]
+
+    Level traversal
+    Order = 25, 20, 27, 15, 22, 26, 30, 29, 32.
+
+    Pre-order traversal
+    Order = 25, 20, 15, 22, 27, 26, 30, 29, 32.
+
+    In-order traversal
+    Order = 15, 20, 22, 25, 26, 27, 29, 30, 32.
+
+    Post-order traversal
+    Order = 15, 22, 20, 26, 29, 32, 30, 27, 25.
  */
 public class Main
 {
@@ -149,5 +184,8 @@ public class Main
         intTree.insert(26);
         intTree.insert(22);
         intTree.insert(32);
+
+        intTree.traverseInOrder();
     }
+
 }
