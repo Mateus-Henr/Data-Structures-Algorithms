@@ -184,8 +184,17 @@ public class Main
         intTree.insert(26);
         intTree.insert(22);
         intTree.insert(32);
+        intTree.insert(17);
 
+        System.out.println("In-order traversal");
         intTree.traverseInOrder();
+
+        System.out.println("\nLooking for 27 -> " + intTree.get(27));
+        System.out.println("Looking for 17 -> " + intTree.get(17));
+        System.out.println("Looking for 43 -> " + intTree.get(43));
+
+        System.out.println("Min value = " + intTree.min());
+        System.out.println("Max value = " + intTree.max());
     }
 
 }

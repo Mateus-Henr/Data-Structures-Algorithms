@@ -46,6 +46,51 @@ public class TreeNode
         }
     }
 
+    public TreeNode get(int value) // Similar to the insertion method.
+    {
+        if (value == data)
+        {
+            return this; // Returns "this" tree node.
+        }
+
+        if (value < data)
+        {
+            if (leftChild != null)
+            {
+                return leftChild.get(value);
+            }
+        }
+        else
+        {
+            if (rightChild != null)
+            {
+                return rightChild.get(value);
+            }
+        }
+
+        return null;
+    }
+
+    public int min() // This method goes down the left children.
+    {
+        if (leftChild == null)
+        {
+            return data;
+        }
+
+        return leftChild.min();
+    }
+
+    public int max() // This method goes down the right children.
+    {
+        if (rightChild == null)
+        {
+            return data;
+        }
+
+        return rightChild.max();
+    }
+
     public void traverseInOrder() // Traversal in order = left child, root, right child.
     {
         // This is a recursive method. By using it we can traverse the tree from the leaf to the top.
@@ -89,6 +134,11 @@ public class TreeNode
     public void setRightChild(TreeNode rightChild)
     {
         this.rightChild = rightChild;
+    }
+
+    public String toString()
+    {
+        return "Data = " + data;
     }
 
 }
