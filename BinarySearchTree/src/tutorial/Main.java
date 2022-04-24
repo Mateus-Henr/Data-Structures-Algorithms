@@ -168,6 +168,34 @@ package tutorial;
 
     Post-order traversal
     Order = 15, 22, 20, 26, 29, 32, 30, 27, 25.
+
+
+    Deletion
+    There are three possibilities of node that we can find in a binary search tree, being them:
+        1. Node is a leaf. Just null out the node and cut off the connection.
+        2. Node has one child. We just move the value up to the parent. Whether the value is greater or less than the
+           parent, it's safe to move it up since this child will always be greater or less than the parent. So we
+           preserve the concept of a binary search tree.
+        3. Node has two children.
+
+    Tree for deletion representations
+                        [25]
+                [20]               [27]
+            [15]     [22]    [26]         [30]
+              [17]                    [29]    [32]
+
+    Leaf deletion (node "17")
+                        [25]
+                [20]               [27]
+            [15]     [22]    [26]         [30]
+                                      [29]    [32]
+
+    One-child node deletion (node "15")
+                        [25]
+                [20]               [27]
+            [17]     [22]    [26]         [30]
+                                      [29]    [32]
+    OBS: This is safe to do because we now that everything in 20's left subtree is less than 20.
  */
 public class Main
 {
