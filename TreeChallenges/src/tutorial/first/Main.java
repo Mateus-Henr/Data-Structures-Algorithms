@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.first;
 
 /*  Trees — Challenge 1
 
@@ -10,6 +10,7 @@ public class Main
     public static void main(String[] args)
     {
         Tree intTree = new Tree();
+
         intTree.insert(25);
         intTree.insert(20);
         intTree.insert(15);
