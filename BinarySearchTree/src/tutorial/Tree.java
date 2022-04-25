@@ -47,7 +47,7 @@ public class Tree
         }
         else // In case that we found the node to be deleted.
         {
-            // Cases 1 and 2: node to delete has 0 or 1 children.
+            // Cases 1 and 2: node to delete has 0 or 1 child(ren).
             if (subtreeRoot.getLeftChild() == null)
             {
                 // If it has a right child then we want it to replace the root. Notice that this is one return
@@ -57,6 +57,16 @@ public class Tree
             else if (subtreeRoot.getRightChild() == null)
             {
                 return subtreeRoot.getLeftChild();
+            }
+            else // Case 3: node to delete has 2 children.
+            {
+                // We want to find the minimum value in the right subtreeRoot.
+                // AT THIS POINT "subtreeRoot" IS THE ROOT THAT WE WANT TO DELETE.
+                // Replace the value in the subtreeRoot node with the smallest value from the right subtree.
+                subtreeRoot.setData(subtreeRoot.getRightChild().min());
+
+                // Delete the node that has the smallest value in the right subtree.
+                subtreeRoot.setRightChild(delete(subtreeRoot.getRightChild(), subtreeRoot.getData()));
             }
         }
 

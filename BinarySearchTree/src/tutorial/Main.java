@@ -261,6 +261,28 @@ public class Main
 
         System.out.println("Min value = " + intTree.min());
         System.out.println("Max value = " + intTree.max());
+
+        System.out.println("\nDeleting values");
+
+//        intTree.delete(15);
+//        System.out.println("After deleting 15");
+//        intTree.traverseInOrder();
+//        System.out.println();
+//
+//        intTree.delete(27);
+//        System.out.println("After deleting 27");
+//        intTree.traverseInOrder();
+//        System.out.println();
+
+        intTree.delete(25);
+        System.out.println("After deleting 25");
+        intTree.traverseInOrder();
+        System.out.println();
+
+        intTree.delete(54);
+        System.out.println("After deleting 54 (doesn't exist)");
+        intTree.traverseInOrder();
+        System.out.println();
     }
 
 }
