@@ -29,7 +29,6 @@ public class Tree
     // returned.
     private TreeNode delete(TreeNode subtreeRoot, int value)
     {
-        // Breaking condition.
         if (subtreeRoot == null)
         {
             return null;

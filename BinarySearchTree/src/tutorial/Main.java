@@ -196,7 +196,45 @@ package tutorial;
             [17]     [22]    [26]         [30]
                                       [29]    [32]
     OBS: This is safe to do because we now that everything in 20's left subtree is less than 20.
+
+    Two-children node deletion
+    • Notice that the parent might already have two children, so we have to decide where the value would go.
+    • Need to figure out what the replacement node will be.
+    • Want minimal disruption to the existing tree structure.
+    • Can take the replacement node from the deleted node's left subtree or right subtree.
+    • If taking it from the left subtree, we have to take the largest value in the left subtree. This happens because
+      we need to make sure that the value that will go into the parent is greater than its left child, and less than
+      its right child. By searching for the greatest value on the left subtree we keep the binary search tree
+      characteristics.
+    • If taking it from the right subtree, we have to take the smallest value in the right subtree.
+    • Choose one and stick to it.
+
+    Two-children node deletion (node "20")
+                        [25]
+                [17]               [27]
+            [15]     [22]    [26]         [30]
+                                      [29]    [32]
+    We decided to take the left subtree, so we will be looking for the greatest value which is "17", this value will
+    become "15"'s parent, and "15"'s child will be nulled out. If "17" had a left child we would need to bring its left
+    child to "17"'s place. NOTICE THAT IF "17" HAD A RIGHT CHILD, "17" COULD NOT BE THE MAXIMUM VALUE.
+
+    Two-children node deletion (node "27")
+                        [25]
+                [17]               [29]
+            [15]     [22]    [26]         [30]
+                                              [32]
+    Now looking at the right subtree, we would look for the smallest value, which would be "29". And we would do the
+    same thing as described when working with the left subtree.
+
+    Two-children node deletion (node "25" root deletion)
+                        [26]
+                [20]               [27]
+            [15]     [22]    [25]         [30]
+              [17]                    [29]    [32]
+    Looking at the right subtree we would get the smallest value, which would be "26", we would set "26" as the root,
+    and we would null out where "26" was.
  */
+
 public class Main
 {
     public static void main(String[] args)
