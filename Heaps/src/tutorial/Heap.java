@@ -1,5 +1,7 @@
 package tutorial;
 
+import java.util.NoSuchElementException;
+
 // We will be implementing a max heap.
 public class Heap
 {
@@ -123,6 +125,16 @@ public class Heap
                 break;
             }
         }
+    }
+
+    public int peek()
+    {
+        if (isEmpty())
+        {
+            throw new IndexOutOfBoundsException("Heap is empty");
+        }
+
+        return heap[0];
     }
 
     public void printHeap()

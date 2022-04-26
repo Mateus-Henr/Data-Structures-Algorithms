@@ -225,6 +225,26 @@ package tutorial;
     OBS: Notice that we never get to check the value against its children due to that fact that previously, the parent
          was greater than its children (due to the heap concept). So if we check that the value that's going to take
          the parent's place is greater than the parent, it'll be greater than the previous parent's children.
+
+
+    Peeking on the heap
+    • Get the value at the root.
+
+
+    Time complexity
+    • Insert an item - It takes O(n) time since we have to potentially fix the heap (heapify), and the worst case is
+                       if we have to swap the value all the way up to the root.
+    • Delete an item - If using a delete method that has to find the value, then we would have linear search, plus the
+                       fixing the heap (O(n)). Therefore, we would have a O(nlog(n)) time.
+                       But when working with heaps, usually you're going to want to delete the root. And for deleting
+                       only the root we would have a O(log(n)) since we don't have to do the linear search.
+    • Peek on an item - O(1). The root will always be at index 0.
+
+
+    Final conclusion
+    • We typically use heaps when we are interested in hierarchical relationships, and we want to acquire either the
+      minimum or maximum values in constant time. This is different from a binary search tree because when using it
+      you have to travel either the right edges or left edges depending on what extreme you want.
  */
 
 public class Main
@@ -253,9 +273,13 @@ public class Main
 //        heap.delete(5); // "40" as in the example.
 //        heap.printHeap();
 
+        System.out.println("\nPeeking on the heap = " + heap.peek());
+
         System.out.println("\nAfter deleting the root");
         heap.delete(0);
         heap.printHeap();
+
+        System.out.println("\nPeeking on the heap = " + heap.peek());
     }
 
 }
