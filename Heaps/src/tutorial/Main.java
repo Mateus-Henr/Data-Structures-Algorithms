@@ -231,7 +231,31 @@ public class Main
 {
     public static void main(String[] args)
     {
+        Heap heap = new Heap(10);
 
+        heap.insert(80);
+        heap.insert(75);
+        heap.insert(60);
+        heap.insert(68);
+        heap.insert(55);
+        heap.insert(40);
+        heap.insert(52);
+        heap.insert(67);
+
+        System.out.println("Printing the heap");
+        heap.printHeap();
+
+//        System.out.println("\nAfter deleting 75");
+//        heap.delete(1); // "75" as in the example.
+//        heap.printHeap();
+
+//        System.out.println("\nAfter deleting 40");
+//        heap.delete(5); // "40" as in the example.
+//        heap.printHeap();
+
+        System.out.println("\nAfter deleting the root");
+        heap.delete(0);
+        heap.printHeap();
     }
 
 }
