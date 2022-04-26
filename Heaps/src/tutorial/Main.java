@@ -165,6 +165,66 @@ package tutorial;
     OBS: We know that the properties of a max heap is maintained because everytime that we swap, we are swapping a
          greater value with its parent, and so we know that after the swap the parent will have a greater value than
          its child.
+
+
+    Deleting from the heap
+    • Must choose a replacement value (size - 1, when it comes to the array).
+    • Will take the rightmost value in the heap (or the right most value in the tree), so that the tree remains
+      complete. Remember that one requirement for the heap structure is a complete tree, because of that, if we are
+      removing from the heap in an array representation we would only shift values to the right.
+    • Then we must heapify the heap.
+    • When replacement value is greater than parent, fix heap above. Otherwise, fix heap below. It's more usual to look
+      down the heap, when you put a parent in a place that's less than its children. However, it's possible that we
+      put it somewhere that's greater than its parent, and for this scenario, we would look up the heap.
+
+    Choosing how to look at the heap
+    • We only have to fix the upwards or downwards, never both directions.
+    • Fix heap above — Same as insert. Swap replacement value with parent. If the value is greater than its parent.
+    • Fix heap below — Swap the replacement value with the larger of its two children. If the value is smaller than its
+      children.
+    • Rinse and repeat in both cases until the replacement value is in its correct position.
+    • Will only need to fix up or down, not both.
+
+    Base heap for deletion representation
+                       [80]
+                [75]           [60]
+           [68]     [55]   [40]    [52]
+       [67]
+
+    Delete "75"
+                       [80]
+                [67]           [60]
+           [68]     [55]   [40]    [52]
+
+    Replacement value will be 67 which is the rightmost leaf (in the array representation it's easier to identify,
+    being the last value in the array). This way we keep a complete tree.
+
+    Heapifying
+    1. Compare "67" against its parent ("80"), as "67" is smaller, then we don't have to fix the heap upwards.
+    2. Compare "67" against its children ("68") and ("55"), so we get the largest child ("68"), and swap "67" with
+       "68". Notice that we couldn't swap with "55" because we wouldn't have a heap after that.
+    OBS: If there were children from the "68" node, we would have to compare "67" against them before swapping, this
+         would be the repeat that has been mentioned before.
+
+                       [80]
+                [68]           [60]
+           [67]     [55]   [40]    [52]
+
+
+    Delete "40"
+                       [80]
+                [75]           [60]
+           [68]     [55]   [67]    [52]
+
+    Replacement value is 67, the rightmost value in the heap (rightmost leaf at the last level).
+
+    Heapifying
+    1. Compare "67" against its parent ("60"), as "67" is greater, then we fix the heap upwards, so we swap it with
+       "60".
+    2. Compare "67" against its other parent ("80"), as "67" is smaller, we finish the heapifying.
+    OBS: Notice that we never get to check the value against its children due to that fact that previously, the parent
+         was greater than its children (due to the heap concept). So if we check that the value that's going to take
+         the parent's place is greater than the parent, it'll be greater than the previous parent's children.
  */
 
 public class Main
