@@ -1,7 +1,5 @@
 package tutorial;
 
-import java.util.NoSuchElementException;
-
 // We will be implementing a max heap.
 public class Heap
 {
