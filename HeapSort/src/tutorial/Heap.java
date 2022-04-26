@@ -50,6 +50,21 @@ public class Heap
         return deletedValue;
     }
 
+    public void sort()
+    {
+        int lastHeapIndex = size - 1;
+
+        while (lastHeapIndex > 0)
+        {
+            swapInTheHeap(0, lastHeapIndex);
+
+            // Notice that as we are dealing with the root we can only fix the heap below.
+            fixHeapBelow(0, lastHeapIndex - 1);
+
+            lastHeapIndex--;
+        }
+    }
+
     private void fixHeapAbove(int index)
     {
         int newValue = heap[index];
@@ -87,9 +102,7 @@ public class Heap
 
                 if (heap[index] < heap[childToSwap])
                 {
-                    int temp = heap[index];
-                    heap[index] = heap[childToSwap];
-                    heap[childToSwap] = temp;
+                    swapInTheHeap(index, childToSwap);
                 }
                 else
                 {
@@ -123,6 +136,13 @@ public class Heap
             System.out.print(", ");
         }
         System.out.println();
+    }
+
+    private void swapInTheHeap(int a, int b)
+    {
+        int temp = heap[a];
+        heap[a] = heap[b];
+        heap[b] = temp;
     }
 
     public int getParent(int index)

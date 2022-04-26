@@ -123,16 +123,46 @@ package tutorial;
     Array = [52] | [55] [40] [60] [67] [68] [75] [80]
 
     Now that we got to one element, we have sorted the heap.
+    OBS: Whenever we heapified the heap, we heapify it looking down the heap since the root doesn't have any parent
+         we have to check its children.
 
     Final array
         [52] [55] [40] [60] [67] [68] [75] [80]
+
+
+    Final conclusion
+    • In-place algorithm.
+    • It has a time complexity is O(nlog(n)), this happens because we swap n elements, and then on each iteration of
+      the loop, we also have to fix the heap, and this fixing is log(n).
+    • If you have a heap, and you want to sort it, heapsort can be a decent sorting algorithm.
+    • Keep in mind that once you sort the heap, it's no longer a heap. So if you want to keep using the heap you should
+      not sort it.
+    • If you want to apply the heapsort on the data, then you would have to build the heap first, and that would involve
+      heapifying on each step so the time complexity would degrade, even so, doing that could be better than some O(n²)
+      sorting algorithms.
  */
 
 public class Main
 {
     public static void main(String[] args)
     {
+        Heap heap = new Heap(10);
 
+        heap.insert(80);
+        heap.insert(75);
+        heap.insert(60);
+        heap.insert(68);
+        heap.insert(55);
+        heap.insert(40);
+        heap.insert(52);
+        heap.insert(67);
+
+        System.out.println("Printing the heap out");
+        heap.printHeap();
+
+        System.out.println("Printing sorted heap out");
+        heap.sort();
+        heap.printHeap();
     }
 
 }
